@@ -1,0 +1,61 @@
+﻿
+@model ChangePwModel
+@Html.Raw(TempData["message"])
+
+
+<div id="wrap">
+    <section class="bodymain" style="min-height:580px;">
+        <aside class="middle-container">
+            <div class="admin-inr">
+                <br>
+                <form asp-action="ChangePw" asp-controller="Home" method="post">
+                    <div class="form-outer" style="margin-left:320px; width:500px;">
+                        <h1>Change Password</h1>
+                        <div class="contact-row">
+                            <div class="name">Current Password</div>
+                            <div class="txtfld-box">
+                                <input type="text" asp-for="CurrentPassword" name="CurrentPassword">
+                                <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                            </div>
+                            <div class="req-field"> </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="contact-row">
+                            <div class="name">New Password</div>
+                            <div class="txtfld-box">
+                                <input type="text" asp-for="NewPassword" name="NewPassword">
+                                <span asp-validation-for="NewPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="contact-row">
+                            <div class="name">Confirm Password</div>
+                            <div class="txtfld-box">
+                                <input type="password" asp-for="ConfirmPassword" name="ConfirmPassword">
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="clear">&nbsp;</div>
+                        <div class="contact-row">
+                            <div class="name" style="float:right; width:1px;">&nbsp;</div>
+                            <div style="background:none; border:none; float:left;">
+                                <input type="submit" class="btn" value="Change Password">
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="clear">&nbsp;</div>
+
+                <div class="clear"></div>
+
+            </div>
+        </aside>
+        <div class="clear"></div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </section>
+</div>
+<div class="clear"></div>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>

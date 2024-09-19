@@ -1,0 +1,134 @@
+﻿
+@model IEnumerable<ViewModelSubCategories>
+
+
+<div id="wrap">
+    <div class="clear" style="height:5px;"></div>
+    <form asp-action="AddSubCategory" asp-controller="SubCategory" method="post">
+        <div id="wrap2">
+            <h1>Add Sub Category</h1>
+            <br>
+
+            <div class="form-raw">
+                <div class="form-name">Select Category</div>
+
+                <div class="form-txtfld">
+                    <select type="text" id="Category" name="Categoryy"  required><option value="">Select Category</option></select>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="form-raw">
+                <div class="form-name">Add Sub Category</div>
+                <div class="form-txtfld">
+                    <input type="text" asp-for="@Model.FirstOrDefault().Name" value="">
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="form-raw">
+            <div class="form-name">Active</div>
+            <div class="form-txtfld">
+                <input type="checkbox" asp-for="@Model.FirstOrDefault().Status" id="statusCheckbox">
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="form-raw">
+            <div class="form-name">&nbsp;</div>
+            <div class="form-txtfld" style="width:290px;">
+                <input type="submit" class="btn" value="Submit">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="clear">&nbsp;</div>
+</div>
+<div id="wrap3">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="admintable">
+        <tr>
+            <th width="59" align="left" valign="middle">Sr.No.</th>
+            <th width="752" align="left" valign="middle">Category Name</th>
+            <th width="752" align="left" valign="middle">Sub Category Name</th>
+            <th width="77" align="left" valign="middle">Status</th>
+            <th width="54" align="left" valign="middle">Edit</th>
+            <th width="71" align="left" valign="middle">Remove</th>
+        </tr>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td align="left" valign="top">@item.Id</td>
+                <td align="left" valign="top">@item.Categoryy</td>
+                <td align="left" valign="top">@item.Name</td>
+                @if (item.Status == true)
+                {
+
+                    <td align="left" valign="top"><strong>Active</strong></td>
+                }
+                else
+                {
+                    <td align="left" valign="top"><strong>Inactive</strong></td>
+                }
+                <td align="left" valign="top"><a asp-action="GetSubCategory" asp-controller="SubCategory" asp-route-id="@item.Id">Edit</a></td>
+                <td align="center" valign="top"><a onclick="del(@item.Id)"><img src="~/images/icon-bin.jpg" alt="" width="25" height="25" border="0" align="absmiddle" /></a></td>
+
+            </tr>
+            }
+        </table>
+    <div class="clear">&nbsp;</div>
+</div>
+<div class="clear"></div>
+
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+
+<script type="text/javascript">$(document).ready(function () {
+        GetCategories();
+    $('#statusCheckbox').prop('checked', false);
+    });
+    function GetCategories() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8585/CategoryActive",
+            success: function (result) {
+                
+                var categoryDropdown = $('#Category');
+                categoryDropdown.empty(); // Clear existing options
+                categoryDropdown.append('<option value="">Select Category</option>'); // Add default option
+
+                $.each(result, function (i, data) {
+                   
+                    categoryDropdown.append('<option value="' + data.id + '">' + data.category + '</option>');
+                    console.log(data);
+                });
+            },
+            error: function (error) {
+                console.log("Error fetching categories: " + error);
+            }
+        });
+    }
+
+    function del(id) {
+        $.ajax({
+            type: "POST",
+            url: "/Home/DeleteSub?Id=" + id,
+            success: function () {
+                alert('Record Deleted!');
+                window.location.reload();
+            },
+            error: function () {
+                alert("Data can't be Deleted!");
+            }
+
+        });
+    }
+
+    </script>

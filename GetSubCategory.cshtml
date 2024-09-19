@@ -1,0 +1,92 @@
+﻿
+@model ViewModelSubCategories
+
+
+<div id="wrap">
+    <div class="clear" style="height:5px;"></div>
+    <form asp-action="EditSub" asp-controller="SubCategory" asp-route-id="@Model.Id" method="post">
+
+        <div id="wrap2">
+            <h1>Add Sub Category</h1>
+            <br>
+
+            <div class="form-raw">
+                <div class="form-name">Select Category</div>
+
+                <div class="form-txtfld">
+                    <select type="text" id="Category" name="Categoryy" required><option value=""></option></select>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="form-raw">
+                <div class="form-name">Add Sub Category</div>
+                <div class="form-txtfld">
+                    <input type="text" asp-for="Name">
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="form-raw">
+            <div class="form-name">Active</div>
+            <div class="form-txtfld">
+                <input type="checkbox" asp-for="Status">
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="form-raw">
+            <div class="form-name">&nbsp;</div>
+            <div class="form-txtfld" style="width:290px;">
+                <input type="submit" class="btn" value="Update">
+            </div>
+        </div>
+    </form>
+
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+
+    <script type="text/javascript">$(document).ready(function () {
+        GetCategories();
+
+    });
+    function GetCategories() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8585/CategoryActive",
+            //success: function (result) {
+            //    var categoryDropdown = $('#Category');
+            //   // categoryDropdown.empty(); // Clear existing options
+            //    categoryDropdown.append('<option value="">Select Category</option>'); // Add default option
+
+            //    $.each(result, function (i, data) {
+
+            //        categoryDropdown.append('<option value="' + data.id + '">' + data.category + '</option>');
+            //        console.log(data);
+            //    });
+            //},
+            success: function (result) {
+            var categoryDropdown = $('#Category');
+            categoryDropdown.append('<option value="">Select Category</option>'); // Add default option
+
+            $.each(result, function (i, data) {
+                // Check if the current category matches the one you want to preselect
+                var selectedAttribute = data.id === @Model.CategoryId ? 'selected' : '';
+                categoryDropdown.append('<option value="' + data.id + '" ' + selectedAttribute + '>' + data.category + '</option>');
+                console.log(data);
+            });
+            },
+            error: function (error) {
+                console.log("Error fetching categories: " + error);
+            }
+        });
+    }
+    </script>
