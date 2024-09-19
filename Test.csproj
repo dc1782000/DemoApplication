@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Menu\" />
+    <Content Remove="wwwroot\Image\akslogo.png" />
+    <Content Remove="wwwroot\Image\phoneicon.jpg" />
+    <Content Remove="wwwroot\Image\icon-bin.jpg" />
+    <Content Remove="wwwroot\Image\favicon.ico" />
+    <Content Remove="wwwroot\Image\hdr-rep.png" />
+    <Content Remove="wwwroot\Image\product.jpg" />
+    <Content Remove="wwwroot\Image\delete.gif" />
+    <Content Remove="wwwroot\Image\search-rep.png" />
+    <Content Remove="wwwroot\Image\logout.png" />
+    <Content Remove="wwwroot\Image\mainlock.png" />
+    <Content Remove="wwwroot\Image\logo.png" />
+    <Content Remove="wwwroot\Image\lock-image.png" />
+    <Content Remove="wwwroot\Image\bg2.jpg" />
+    <Content Remove="wwwroot\Image\bg.jpg" />
+    <Content Remove="wwwroot\images\" />
+    <Content Remove="wwwroot\pdfuploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\Menu\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="Views\MyLoginSignUp\" />
+    <Folder Include="Views\Category\" />
+    <Folder Include="Views\SubCategory\" />
+    <Folder Include="Views\Product\" />
+    <Folder Include="wwwroot\pdfuploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.27" />
+    <PackageReference Include="Newtonsoft.Json" Version="6.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestApi\TestApi.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\MyLoginSignUp\" />
+    <None Remove="Views\Category\" />
+    <None Remove="Views\SubCategory\" />
+    <None Remove="Views\Product\" />
+  </ItemGroup>
+</Project>
